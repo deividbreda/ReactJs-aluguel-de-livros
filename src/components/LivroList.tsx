@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaTrashAlt, FaChevronDown, FaCheckCircle } from "react-icons/fa";
+import { FaTrashAlt, FaChevronDown, FaCheckCircle, FaTimes } from "react-icons/fa";
 
 import logo from '../images/logo.png';
 
@@ -15,13 +15,17 @@ export function LivroList(){
     const [idItem, setIdItem] = useState(1);
     const [newNome, setNewNome] = useState('');
     const [newAutor, setNewAutor] = useState('');
+    const [showValidacao, setShowValidacao] = useState(false);
 
     function inserirItem(){
-        if(newNome == ''){
-            alert("Insira um nome");
-        } else if(newAutor == ''){
-            alert("Insira um preço");
+        if(newNome.length <= 0){ 
+            setShowValidacao(true);
+
+        } else if(newAutor.length <= 0){
+            setShowValidacao(true);
+
         } else {
+            setShowValidacao(false);
             setIdItem(idItem + 1);
 
             const novoItem = {
@@ -31,9 +35,10 @@ export function LivroList(){
             }
 
             setItens(oldState => [...oldState, novoItem]);
-            setNewNome('');
-            setNewAutor('');
         }
+
+        setNewNome('');
+        setNewAutor('');
     }
 
     function removeLivro(id: number){
@@ -44,6 +49,7 @@ export function LivroList(){
     function alugaLivro(item){
         const removeLivros = itens.filter(itemAlugados => itemAlugados.id !== item.id);
         setItens(removeLivros);
+        
         const novoItem = {
             id: item.id,
             titulo: item.titulo,
@@ -64,25 +70,32 @@ export function LivroList(){
                         
                         <div className="allConteudoInputsLivro">
                             <h1 className="tituloCadastro"> Cadastro </h1>
+
+                            {showValidacao && (     
+                                <h1 className="validaInput"> <FaTimes/> Preencha os campos titúlo e autor corretamente! </h1>    
+                            )}
+
                             <div className="col">
                                 <div className="allConteudoInputs">
                                     <div className="col col-2-input">
                                         <div className="itemInputLivro">
                                             <h1 className="tituloCadastroInputs"> Titúlo: </h1>
-                                            <input className="inputCadastro" placeholder="Titúlo do Livro..." type="text" value={newNome} onChange={(e)=>setNewNome(e.target.value)} />
+                                            <input className={showValidacao ? "inputCadastroError" : "inputCadastro" } placeholder="Titúlo do Livro..." type="text" value={newNome} onChange={(e)=>setNewNome(e.target.value)} />
+                                            
                                         </div>
                                     </div>
 
                                     <div className="col col-2-input">
                                         <div className="itemInputLivro">
                                             <h1 className="tituloCadastroInputs"> Autor: </h1>
-                                            <input className="inputCadastro" placeholder="Autor do Livro..." type="text" value={newAutor} onChange={(e)=>setNewAutor(e.target.value)} />
+                                            <input className={showValidacao ? "inputCadastroError" : "inputCadastro" } placeholder="Autor do Livro..." type="text" value={newAutor} onChange={(e)=>setNewAutor(e.target.value)} />
+                                    
                                         </div>
                                     </div>
 
                                     <div className="col col-2-button">
                                         <div className="itemInputLivroButton">
-                                            <input className="inputCadastroButton" type="button" value="Inserir" onClick={inserirItem}/>
+                                            <input className="inputCadastroButton" type="button" value="Adicionar livro" onClick={inserirItem}/>
                                         </div>
                                     </div>
                                 </div>
@@ -91,6 +104,11 @@ export function LivroList(){
                     
                             <h1 className="tituloCadastro"> Banco de Livros </h1>
                             <div className="allConteudoItemLivro">
+                                
+                            {itens.length ? (
+                                null
+                            ) : <h1 className="validacaoBanco"> Cadastre um novo livro... </h1>}
+
                             {itens.map(item => (                               
                                 <div key={item.id} className="col col-3">   
                                     <div className="allItemConteudoLivro">                                   
@@ -119,7 +137,10 @@ export function LivroList(){
                             ))}
                             </div>
 
-                            <h1 className="tituloCadastro"> Alugados </h1>
+                            {itensAlugados.length ? (
+                                <h1 className="tituloCadastro"> Alugados </h1>
+                            ) : null }
+                            
                             <div className="allConteudoItemLivro">
                                 {itensAlugados.map(item => (
                                     <div key={item.id} className="col col-3">
