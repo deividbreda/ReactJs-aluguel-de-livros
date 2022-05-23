@@ -1,10 +1,10 @@
-import { Home } from './components/Home';
+import { LivroList } from './components/LivroList';
 import './styles/global.scss';
 
 export function App(){
     return(
         <>
-            <Home />
+            <LivroList />
         </>
     ); 
 }
