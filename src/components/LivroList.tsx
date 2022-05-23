@@ -17,6 +17,11 @@ export function LivroList(){
     const [newNome, setNewNome] = useState('');
     const [newAutor, setNewAutor] = useState('');
     const [showValidacao, setShowValidacao] = useState(false);
+    const [pesquisa, setPesquisa] = useState('');
+
+    const lowerPesquisa = pesquisa.toLowerCase();
+    const filtroLivros = itens.filter((livro) => livro.titulo.toLowerCase().includes(lowerPesquisa))
+    const filtroLivrosAlugados = itensAlugados.filter((livro) => livro.titulo.toLowerCase().includes(lowerPesquisa))
 
     function inserirItem(){
         if(newNome.length <= 0){ 
@@ -59,6 +64,19 @@ export function LivroList(){
         setItensAlugados(oldState => [...oldState, novoItem]);
     }
 
+    function devolveLivro(item: Livro){
+        const removeLivros = itensAlugados.filter(itemAlugados => itemAlugados.id !== item.id);
+        setItensAlugados(removeLivros);
+
+        const novoItem = {
+            id: item.id,
+            titulo: item.titulo,
+            autor: item.autor,
+        }
+
+        setItens(oldState => [...oldState, novoItem]);
+    }
+    
     return(
         <div id="livro">
             <div className="containerHome">
@@ -78,7 +96,11 @@ export function LivroList(){
                                 autor={newAutor}
                                 novoAutor={setNewAutor}
                                 valida={showValidacao}
-                            />      
+                            />   
+       
+                            <div className="flexCentralizado containerFlexCentralizado">
+                                <input className="inputPesquisa" value={pesquisa} placeholder="Procurar um livro..." onChange={(e)=>setPesquisa(e.target.value)} />
+                            </div>
                     
                             <h1 className="tituloCadastro"> Banco de Livros </h1>
                             <div className="allConteudoItemLivro">    
@@ -86,7 +108,7 @@ export function LivroList(){
                                     null
                                 ) : <h1 className="validacaoBanco"> Cadastre um novo livro... </h1>}
 
-                                {itens.map(item => {
+                                {filtroLivros.map(item => {
                                     return <Livros key={item.id} item={item} remove={removeLivro} aluga={alugaLivro} /> 
                                 })}
                             </div>
@@ -96,8 +118,8 @@ export function LivroList(){
                             ) : null }
                             
                             <div className="allConteudoItemLivro">
-                                {itensAlugados.map(item => (
-                                    <LivrosAlugados key={item.id} item={item}/>
+                                {filtroLivrosAlugados.map(item => (
+                                    <LivrosAlugados key={item.id} item={item} devolve={devolveLivro}/>
                                 ))}
                             </div>
                         </div>

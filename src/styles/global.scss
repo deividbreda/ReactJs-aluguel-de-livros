@@ -153,7 +153,6 @@ input {
 }
 
 .containerFlexCentralizado {
-	max-width: 420px;
 	margin: 0 auto;
 	display: flex;
 }
@@ -203,6 +202,23 @@ input {
     
         .allConteudoInputsLivro {
             padding: 10px 50px;
+        }
+
+        .inputPesquisa {
+            border: none;
+            padding: 10px;
+            border-bottom: 3px solid #175170;
+            width: 60%;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 22px;
+            color: #175170;
+            text-indent: 10px;
+            margin-top: 30px;
+        }
+
+        .inputPesquisa::placeholder {
+            color: #175170;
         }
     
         .tituloCadastro {
@@ -270,7 +286,7 @@ input {
     
         .inputCadastro::placeholder {
             color: #68caff;
-          }
+        }
     
         .itemInputLivro {
             margin-right: 30px;
@@ -386,6 +402,33 @@ input {
                     font-size: 32px;
                     text-align: center;
                 }
+
+                .botaoDevolver {
+                    background: #199ee6;
+                    border: none;
+                    border-radius: 30px;
+                    box-shadow: 0px 0px 8px #0000001c;
+                    color: #ffffff;
+                    text-transform: uppercase;
+                    padding: 5px 8px;
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: bold;
+                    display: inline-block;
+                    cursor: pointer;
+                    width: 100%;
+                    margin-top: 20px;
+                    transition: all .3s;
+                }
+
+                .itemBotaoDevolver {
+                    padding: 0 30px;
+                }
+
+                .botaoDevolver:hover {
+                    background: red;
+                    transform: all .3s;
+                }
+
             }
         }
     }
