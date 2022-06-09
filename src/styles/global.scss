@@ -40,6 +40,15 @@ textarea {
     font-size: 1.1em;
 }
 
+body, input, textarea, button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 600;
+}
+
 button,
 textarea,
 select,
@@ -185,7 +194,7 @@ input {
         background: #fff;
         margin: 6% 30px;
         border-radius: 50px;
-        box-shadow: 0px 0px 12px #00000040;
+        box-shadow: 0px 0px 12px #00000014;
 
         .logoLivros {
             width: 350px;
@@ -199,38 +208,60 @@ input {
             color: #175170;
             padding-top: 50px;
         }
+
+        .allConteudoCabecalho {
+            background: #27628a;
+            padding: 20px 50px;
+            margin-top: 50px;
+        }
     
         .allConteudoInputsLivro {
-            padding: 10px 50px;
+            padding: 0px 50px 50px 50px;
+            background: #1e5072;
+            border-radius: 0px 0px 50px 50px;
+        }
+
+        .itensPesquisa {
+            display: flex;
+            position: relative;
+            
         }
 
         .inputPesquisa {
             border: none;
             padding: 10px;
-            border-bottom: 3px solid #175170;
-            width: 60%;
+            width: 100%;
             font-family: 'Poppins', sans-serif;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 22px;
             color: #175170;
+            background: #daf3ff;
+            border-radius: 30px;
             text-indent: 10px;
-            margin-top: 30px;
         }
 
         .inputPesquisa::placeholder {
-            color: #175170;
+            color: #9ecee7;
+        }
+
+        .iconePesquisa {
+            position: absolute;
+            right: 25px;
+            top: 12px;
+            font-size: 22px;
+            color: #1e5072;
         }
     
         .tituloCadastro {
             font-family: 'Poppins', sans-serif;
-            font-size: 22px;
+            font-size: 32px;
             text-align: left;
             text-transform: uppercase;
-            color: #199ee6;  
+            color: #73c7ff;  
             position: relative;
-            margin-top: 30px;
+            padding-top: 30px;
         }
-    
+
         .tituloCadastro::after {
             position: absolute;
             left: 0;
@@ -238,9 +269,35 @@ input {
             height: 4px;
             width: 8%;
             border-radius: 30px;
-            background: #eeeeee;
+            background: #27628a;
             content: "";
             margin: 0 auto;
+        }
+
+        .botaoCadastra {
+            border: none;
+            padding: 10px 20px;
+            font-size: 22px;
+            color: #fff;
+            background: #73c7ff;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+
+            transition: filter 0.2s;
+
+            &:hover {
+                filter: brightness(0.8);
+            }
+
+            span {
+                text-align: center;
+            }
+        }
+
+        .positionBotaoCadastra {
+            text-align: right;
         }
 
         .validaInput {
@@ -254,182 +311,308 @@ input {
             padding: 10px 30px;
             margin-top: 30px;
         }
-    
-        .allConteudoInputs {
-            padding: 30px 0;
-        }
-    
-        .tituloCadastroInputs {
-            font-family: 'Poppins', sans-serif;
-            font-size: 22px;
-            color: #175170;
-            margin-bottom: 5px;
-        }
-    
-        .inputCadastro {
-            background: #c7ebff;
-            color: #175170;
-            border-radius: 0px 30px 30px 0px;
-            border: none;
-            padding: 10px;
+
+        table {
             width: 100%;
+            border-spacing: 0 8px;
+            margin-top: 12px;
+            margin-bottom: 22px;
+        }
+    
+        th {
+            color: #5c92b8;
+            font-weight: 400;
+            padding: 8px 32px;
+            text-align: left;
+        }
+    
+        td {
+            padding: 16px 32px;
+            border: 0;
+            background: #daf3ff;
+            color: #5c92b8;
+
+            &.tabelaTdAlugados {
+                background: #184664;
+
+                &:first-child {
+                    color: #5c92b8;
+                    font-weight: 600;
+                    border-radius: 30px 0 0 30px;
+                }
+            }
+    
+            &:first-child {
+                color: #1e5072;
+                font-weight: 600;
+                border-radius: 30px 0 0 30px;
+            }
+
+            &:last-child {
+                border-radius: 0 30px 30px 0
+            }
+
+            .botaoTabela {
+                display: flex;
+                gap: 12px;
+                justify-content: end;
+            }
+
+            .botaoAlugar {
+                border: none;
+                line-height: 15px;
+                font-size: 26px;
+                color: #3e9fe6;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            .botaoVer {
+                border: none;
+                line-height: 15px;
+                font-size: 26px;
+                color: #1f5170;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            .botaoDevolver {
+                border: none;
+                line-height: 15px;
+                font-size: 26px;
+                color: #3e9fe6;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            .botaoRemover {
+                border: none;
+                line-height: 15px;
+                font-size: 19px;
+                color: #ff0808;
+                background: transparent;
+                cursor: pointer;
+            }
         }
 
-        .inputCadastroError {
-            background: #ffc1c1;
-            color: #175170;
-            border-radius: 0px 30px 30px 0px;
-            border: none;
-            padding: 10px;
-            width: 100%;
-        }
-    
-        .inputCadastro::placeholder {
-            color: #68caff;
-        }
-    
-        .itemInputLivro {
-            margin-right: 30px;
-        }
-    
-        .itemInputLivroButton {
-            margin-right: 0px;
-        }
-    
-        .inputCadastroButton {
-            background: #175170;
-            color: #fff;
+        .validacaoBanco {
             font-family: 'Poppins', sans-serif;
-            text-transform: uppercase;
-            border: none;
-            padding: 6px;
-            width: 100%;
-            margin-top: 38px;
-            cursor: pointer;
-        }  
-    
-        .allConteudoItemLivro {
-            padding: 30px 0;
+            font-size: 18px;
+            font-weight: normal;
+            color: #467b9e;
+            margin-top: 30px;
+        }
 
-            .validacaoBanco {
+        .validacaoPesquisa {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: normal;
+            color: #467b9e;
+            margin-top: 30px;
+        }
+
+        .allItemConteudoLivro {
+            margin: 10px 10px;
+            padding: 30px 15px;
+            background: #dfdfdf;
+            border-radius: 30px;
+            
+            .tituloItemLivro {
                 font-family: 'Poppins', sans-serif;
-                font-size: 20px;
-                color: #d8d8d8;
+                font-size: 18px;
+                text-align: center;
             }
     
-            .allItemConteudoLivro {
-                margin: 10px 10px;
-                padding: 30px 15px;
-                background: #dfdfdf;
-                border-radius: 30px;
-                
-                .tituloItemLivro {
-                    font-family: 'Poppins', sans-serif;
-                    font-size: 18px;
-                    text-align: center;
-                }
-        
-                .autorItemLivro {
-                    font-family: 'Poppins', sans-serif;
-                    text-align: center;
-                }
-        
-                .allConteudoItemInputButton {
-                    padding: 30px 0 10px 0;
-                }
-        
-                .itemConteudoInputButton {
-                    margin: 0 5px;
-                }
-        
-                .buttonRemoveItemLivro {
-                    border-radius: 30px;
-                    background: red;
-                    color: #fff;
-                    border: none;
-                    padding: 5px;
-                    width: 100%;
-                    cursor: pointer;
-                    font-size: 16px;
-                }
-        
-                .buttonAlugaItemLivro {
-                    background: green;
-                    border-radius: 30px;
-                    color: #fff;
-                    border: none;
-                    padding: 5px;
-                    width: 100%;
-                    cursor: pointer;
-                    font-size: 16px;
-                }
+            .autorItemLivro {
+                font-family: 'Poppins', sans-serif;
+                text-align: center;
             }
     
-            .allItemConteudoLivroAlugado {
-                margin: 10px 10px;
-                padding: 30px 15px;
-                background: #0c9924;
+            .allConteudoItemInputButton {
+                padding: 30px 0 10px 0;
+            }
+    
+            .itemConteudoInputButton {
+                margin: 0 5px;
+            }
+    
+            .buttonRemoveItemLivro {
                 border-radius: 30px;
+                background: red;
+                color: #fff;
+                border: none;
+                padding: 5px;
+                width: 100%;
+                cursor: pointer;
+                font-size: 16px;
+            }
     
-                .tituloItemLivroAlugado {
-                    font-family: 'Poppins', sans-serif;
-                    font-size: 18px;
-                    text-align: center;
-                    color: #fff;
-                }
-    
-                .tituloItemAutorAlugado {
-                    font-family: 'Poppins', sans-serif;
-                    text-align: center;
-                    color: #fff;
-                }
-                
-                .alugadoCheck {
-                    padding-bottom: 20px;
-                }
-
-                .alugaItemAutorAlugado {
-                    font-family: 'Poppins', sans-serif;
-                    font-weight: bold;
-                    color: #fff;
-                    font-size: 22px;
-                    text-align: center;
-                    text-transform: uppercase;
-                }
-
-                .alugaItemAutorAlugadoIcon {            
-                    color: #fff;
-                    font-size: 32px;
-                    text-align: center;
-                }
-
-                .botaoDevolver {
-                    background: #199ee6;
-                    border: none;
-                    border-radius: 30px;
-                    box-shadow: 0px 0px 8px #0000001c;
-                    color: #ffffff;
-                    text-transform: uppercase;
-                    padding: 5px 8px;
-                    font-family: 'Poppins', sans-serif;
-                    font-weight: bold;
-                    display: inline-block;
-                    cursor: pointer;
-                    width: 100%;
-                    margin-top: 20px;
-                    transition: all .3s;
-                }
-
-                .itemBotaoDevolver {
-                    padding: 0 30px;
-                }
-
-                .botaoDevolver:hover {
-                    background: red;
-                    transform: all .3s;
-                }
-
+            .buttonAlugaItemLivro {
+                background: green;
+                border-radius: 30px;
+                color: #fff;
+                border: none;
+                padding: 5px;
+                width: 100%;
+                cursor: pointer;
+                font-size: 16px;
             }
         }
     }
 }
+
+.reactModalOverlay {
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reactModalContent{
+    width: 100%;
+    max-width: 576px;
+    background: #fff;
+    padding: 48px;
+    position: absolute;
+    max-height: 90%;
+    border-bottom: 5px solid #4eb8fe;
+    border-radius: 4px 4px 0 0;
+    overflow: auto;
+    margin: 6% 0;
+
+    .tituloModalAdd, .tituloModalAluga, .tituloModalView, .tituloModalInfoLivroAlugado {
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 30px;
+        color: #2cb7ff;
+    }
+
+    .tituloCadastroInputs {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 22px;
+        margin-top: 22px;
+        color: #1e5072;
+
+        &.livroInfo{
+            font-size: 18px;
+            margin-top: 30px;
+        }
+
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+        
+    }
+
+    .inputTextArea {
+        resize: none;
+        rows: 8;
+    }
+
+    .botaoAddNovoLivro, .botaoAlugaLivro {
+        width: 100%;
+        margin-top: 22px;
+        padding: 10px;
+        border-radius: 30px;
+        border: none;
+        background: #1e5072;
+        color: #fff;
+        cursor: pointer;
+
+        transition: filter 0.2s;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
+
+    .inputCadastro {
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 30px 0 0 30px;
+        border: none;
+        background: #d6f1ff;
+        text-indent: 12px;
+        color: #175170;
+
+        &::placeholder {
+            color: #17517087;
+        }
+    }
+
+    .infoLivro {
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 30px 0 0 30px;
+        border: 2px solid #c3c3c3;
+        background: #e3e3e3;
+        text-indent: 12px;
+        color: #a6a6a6;
+        font-size: 18px;
+        margin-top: 22px;
+        cursor: not-allowed;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .descLivro {
+        font-family: 'Poppins', sans-serif;
+        font-weight: normal;
+        font-size: 24px;
+        color: #313131;
+        
+        &:first-child{
+            font-weight: bold;
+        }
+
+    }
+
+    .validaCadastro {
+        font-size: 18px;
+        background: #fcb6b6;
+        border: 2px solid #f00;
+        border-radius: 4px;
+        color: #f00;
+        padding: 4px;
+        text-align: center;  
+        position: relative;    
+    }
+
+    .validaIcon {
+        position: relative;
+        top: 2px;
+    }
+}
+
+.reactModalClose {
+    position: absolute;
+    right: 26px;
+    top: 26px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    transition: filter 0.2s;
+
+    &:hover {
+        filter: brightness(0.8);
+    }
+}
+
