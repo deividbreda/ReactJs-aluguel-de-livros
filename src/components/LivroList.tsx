@@ -1,131 +1,69 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import logo from '../images/logo.png';
-import { LivroCadastro } from './LivroCadastro';
-import { Livros } from './Livros';
-import { LivrosAlugados } from './LivrosAlugados';
+import { TabelaLivrosAlugados } from './TabelaLivrosAlugados';
+import { TabelaLivros } from './TabelaLivros';
+import { FaSearch } from "react-icons/fa";
+import { useLivro } from '../hooks/useLivros';
 
-export interface Livro {
-    id: number,
-    titulo: string,
-    autor: string,
+
+
+interface ModalProps {
+    abrirModalAddLivro: () => void,
 }
 
-export function LivroList(){
-    const [itens, setItens] = useState<Livro[]>([]);
-    const [itensAlugados, setItensAlugados] = useState<Livro[]>([]);
-    const [idItem, setIdItem] = useState(1);
-    const [newNome, setNewNome] = useState('');
-    const [newAutor, setNewAutor] = useState('');
-    const [showValidacao, setShowValidacao] = useState(false);
+export function LivroList({ abrirModalAddLivro }: ModalProps){
+    const { livros, livrosAlugados } = useLivro();
+
     const [pesquisa, setPesquisa] = useState('');
 
     const lowerPesquisa = pesquisa.toLowerCase();
-    const filtroLivros = itens.filter((livro) => livro.titulo.toLowerCase().includes(lowerPesquisa))
-    const filtroLivrosAlugados = itensAlugados.filter((livro) => livro.titulo.toLowerCase().includes(lowerPesquisa))
-
-    function inserirItem(){
-        if(newNome.length <= 0){ 
-            setShowValidacao(true);
-    
-        } else if(newAutor.length <= 0){
-            setShowValidacao(true);
-    
-        } else {
-            setShowValidacao(false);
-            setIdItem(idItem + 1);
-    
-            const novoItem = {
-                id: idItem,
-                titulo: newNome,
-                autor: newAutor,
-            }
-    
-            setItens(oldState => [...oldState, novoItem]);
-        }
-    
-        setNewNome('');
-        setNewAutor('');
-    }
-
-    function removeLivro(id: number){
-        const removeLivros = itens.filter(item => item.id !== id);
-        setItens(removeLivros);
-    }
-
-    function alugaLivro(item: Livro){
-        const removeLivros = itens.filter(itemAlugados => itemAlugados.id !== item.id);
-        setItens(removeLivros);
-        
-        const novoItem = {
-            id: item.id,
-            titulo: item.titulo,
-            autor: item.autor,
-        }
-        setItensAlugados(oldState => [...oldState, novoItem]);
-    }
-
-    function devolveLivro(item: Livro){
-        const removeLivros = itensAlugados.filter(itemAlugados => itemAlugados.id !== item.id);
-        setItensAlugados(removeLivros);
-
-        const novoItem = {
-            id: item.id,
-            titulo: item.titulo,
-            autor: item.autor,
-        }
-
-        setItens(oldState => [...oldState, novoItem]);
-    }
+    const filtroLivros = livros.filter((livro) => livro.titulo.toLowerCase().includes(lowerPesquisa))
+    const filtroLivrosAlugados = livrosAlugados.filter((livro) => livro.titulo.toLowerCase().includes(lowerPesquisa))
     
     return(
-        <div id="livro">
+        <div id="livro">          
             <div className="containerHome">
                 <div className="allConteudoLivro">
                     <div className="col">
                         <div className="flexCentralizado containerFlexCentralizado">
                             <img src={logo} alt="" className="logoLivros" />
                         </div>
-                        
-                        <div className="allConteudoInputsLivro">
-                            <h1 className="tituloCadastro"> Cadastro </h1>
 
-                            <LivroCadastro 
-                                cadastra={inserirItem} 
-                                titulo={newNome}
-                                novoTitulo={setNewNome}
-                                autor={newAutor}
-                                novoAutor={setNewAutor}
-                                valida={showValidacao}
-                            />   
+                        <div className="allConteudoCabecalho">
+                            <div className="col">
+                                <div className="col col-2">
+                                    <div className="itensPesquisa">
+                                        <input className="inputPesquisa" value={pesquisa} placeholder="Procurar um livro..." onChange={(e)=>setPesquisa(e.target.value)} />
+                                        <p className="iconePesquisa"> {<FaSearch />}  </p>
+                                    </div>
+                                </div>
+
+                                <div className="col col-2">
+                                    <p className="positionBotaoCadastra"> <a type="submit" className="botaoCadastra" onClick={abrirModalAddLivro}> CADASTRAR LIVRO </a> </p>
+                                </div>
+                            </div>
+                        </div>
        
-                            <div className="flexCentralizado containerFlexCentralizado">
-                                <input className="inputPesquisa" value={pesquisa} placeholder="Procurar um livro..." onChange={(e)=>setPesquisa(e.target.value)} />
-                            </div>
-                    
-                            <h1 className="tituloCadastro"> Banco de Livros </h1>
-                            <div className="allConteudoItemLivro">    
-                                {itens.length ? (
-                                    null
+                        <div className="allConteudoInputsLivro">
+                            <h1 className="tituloCadastro"> Banco de Livros </h1>                              
+                            <div className="itemConteudoLivro">
+                                {livros.length ? (
+                                    <TabelaLivros livros={filtroLivros} />
                                 ) : <h1 className="validacaoBanco"> Cadastre um novo livro... </h1>}
-
-                                {filtroLivros.map(item => {
-                                    return <Livros key={item.id} item={item} remove={removeLivro} aluga={alugaLivro} /> 
-                                })}
-                            </div>
-
-                            {itensAlugados.length ? (
-                                <h1 className="tituloCadastro"> Alugados </h1>
-                            ) : null }
+                            </div>                               
                             
-                            <div className="allConteudoItemLivro">
-                                {filtroLivrosAlugados.map(item => (
-                                    <LivrosAlugados key={item.id} item={item} devolve={devolveLivro}/>
-                                ))}
-                            </div>
+                            {livrosAlugados.length ? (
+                                <>
+                                <h1 className="tituloCadastro"> Alugados </h1>
+                                <div className="itemConteudoLivro">
+                                    <TabelaLivrosAlugados livros={filtroLivrosAlugados} />
+                                </div>
+                                </>
+                            ) : null }          
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>     
     );
 }
